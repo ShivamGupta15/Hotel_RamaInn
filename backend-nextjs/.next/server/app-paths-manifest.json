@@ -1,0 +1,12 @@
+{
+  "/api/payments/verify/route": "app/api/payments/verify/route.js",
+  "/api/admin/metrics/route": "app/api/admin/metrics/route.js",
+  "/api/admin/rooms/route": "app/api/admin/rooms/route.js",
+  "/api/admin/users/route": "app/api/admin/users/route.js",
+  "/page": "app/page.js",
+  "/api/admin/audit-logs/route": "app/api/admin/audit-logs/route.js",
+  "/api/admin/payments/route": "app/api/admin/payments/route.js",
+  "/api/admin/rooms/[roomId]/calendar/override/route": "app/api/admin/rooms/[roomId]/calendar/override/route.js",
+  "/api/admin/bookings/route": "app/api/admin/bookings/route.js",
+  "/api/admin/audit-logs/record/route": "app/api/admin/audit-logs/record/route.js"
+}

@@ -1,0 +1,11 @@
+.venv/
+backup.
+backup/
+backend_python/
+deploy/
+.env
+.env.production.example
+context.md
+backend/
+/Users/shivamgupta/Documents/hotelRamaiNnproject/backend-nextjs/node_modules/
+**/node_modules/

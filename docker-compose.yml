@@ -1,0 +1,47 @@
+version: "3.8"
+
+services:
+  # ── PostgreSQL Database ──────────────────────────────────────────────────────
+  postgres:
+    image: postgres:16-alpine
+    restart: always
+    environment:
+      POSTGRES_USER: rama
+      POSTGRES_PASSWORD: ${DB_PASSWORD:-rama_production_pass_2026}
+      POSTGRES_DB: rama_inn
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    ports:
+      - "127.0.0.1:5432:5432"
+
+  # ── Redis Cache / Booking TTL Lock ───────────────────────────────────────────
+  redis:
+    image: redis:7-alpine
+    restart: always
+    volumes:
+      - redis_data:/data
+    ports:
+      - "127.0.0.1:6379:6379"
+
+  # ── FastAPI Backend API ──────────────────────────────────────────────────────
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    restart: always
+    depends_on:
+      - postgres
+      - redis
+    env_file:
+      - .env
+    environment:
+      DATABASE_URL: postgresql+asyncpg://rama:${DB_PASSWORD:-rama_production_pass_2026}@postgres:5432/rama_inn
+      SYNC_DATABASE_URL: postgresql://rama:${DB_PASSWORD:-rama_production_pass_2026}@postgres:5432/rama_inn
+      REDIS_URL: redis://redis:6379/0
+    ports:
+      - "127.0.0.1:8000:8000"
+
+volumes:
+  postgres_data:
+  redis_data:
+
