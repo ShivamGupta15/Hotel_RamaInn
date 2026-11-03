@@ -2,6 +2,8 @@ import { NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
 import { inMemoryBookings, DEFAULT_ROOMS } from "@/lib/availability";
 
+export const dynamic = "force-dynamic";
+
 export async function GET() {
   if (prisma) {
     try {

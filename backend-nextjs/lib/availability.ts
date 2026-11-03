@@ -149,7 +149,8 @@ export async function checkAvailability(params: {
         where: { is_active: true },
         orderBy: { base_price_per_night: "asc" },
       });
-    } catch {
+    } catch (err: any) {
+      console.warn("[Database Warning - Room Categories]:", err?.message || err);
       // Fallback to default rooms
       categories = [];
     }
@@ -188,7 +189,8 @@ export async function checkAvailability(params: {
         });
 
         bookedUnits = overlapping.reduce((sum: number, b: any) => sum + (b.rooms_count || 1), 0);
-      } catch {
+      } catch (err: any) {
+        console.warn("[Database Warning - Bookings]:", err?.message || err);
         bookedUnits = 0;
       }
     } else {
